@@ -5,12 +5,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ConnectionRest {
 
     private static Retrofit retrofit;
-    private static final String URL = "";
+    private static final String URL = "https://romantic-expression-production.up.railway.app/api/v1/";
 
-    public static Retrofit getConnection(){
-        if (retrofit == null){
-            retrofit = new Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build();
+    public static Retrofit getConnection() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(URL) // Asegúrate de que esta URL esté correcta
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
         }
-        return retrofit;
-    }
+            return retrofit;
+        }
 }

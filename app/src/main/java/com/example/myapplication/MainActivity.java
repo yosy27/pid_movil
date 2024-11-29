@@ -8,7 +8,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -124,27 +123,27 @@ public class MainActivity extends AppCompatActivity {
                 mensaje(msg);
             }
             public void insertaUsuario(Usuario obj){
-                    Call<Usuario> call = apiUsuario.insertaUsuario(obj);
-                    call.enqueue(new Callback<Usuario>() {
-                        @Override
-                        public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                                if (response.isSuccessful()){
-                                    Usuario obj = response.body();
-                                    if (obj == null) {
-                                        mensaje("ERROR" + "No se insertó");
-                                    }else{
-                                        mensaje("ÉXITO"+ "Se insertó correctamente");
-                                    }
-                                }else{
-                                    mensaje("ERROR" + "Error en la respuesta");
-                                }
+                Call<Usuario> call = apiUsuario.guardarUsuario(obj);
+                call.enqueue(new Callback<Usuario>() {
+                    @Override
+                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                        if (response.isSuccessful()){
+                            Usuario obj = response.body();
+                            if (obj == null) {
+                                mensaje("ERROR" + "No se insertó");
+                            }else{
+                                mensaje("ÉXITO"+ "Se insertó correctamente");
+                            }
+                        }else{
+                            mensaje("ERROR" + "Error en la respuesta");
                         }
+                    }
 
-                        @Override
-                        public void onFailure(Call<Usuario> call, Throwable t) {
-                                mensaje("ERROR"+ t.getMessage());
-                        }
-                    });
+                    @Override
+                    public void onFailure(Call<Usuario> call, Throwable t) {
+                        mensaje("ERROR"+ t.getMessage());
+                    }
+                });
             }
         });
     }

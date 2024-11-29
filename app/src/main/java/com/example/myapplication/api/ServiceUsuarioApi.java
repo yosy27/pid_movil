@@ -8,5 +8,5 @@ import retrofit2.http.POST;
 
 public interface ServiceUsuarioApi {
     @POST("usuario")
-    public abstract Call<Usuario> insertaUsuario(@Body Usuario obj);
+    Call<Usuario> guardarUsuario(@Body Usuario usuario);
 }
